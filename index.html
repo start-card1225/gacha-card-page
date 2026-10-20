@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f1fb">
+  <meta name="description" content="把想说的话交给字卡。和梦角聊天、抽塔罗字卡、写信、记录纪念日，还有一台只属于你们的音乐播放器。">
+  <title>梦境漫游 · Dream Card</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%23b18ade'/%3E%3Cstop offset='1' stop-color='%236a4a8a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='17' fill='url(%23g)'/%3E%3Crect x='14' y='18' width='36' height='28' rx='7' fill='none' stroke='%23fff' stroke-opacity='.9' stroke-width='2.4'/%3E%3Cpath d='M21 27h14M21 33h21M21 39h10' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-opacity='.8'/%3E%3Cpath d='M47 14l1.2 3.4L52 18.5l-3.8 1.1L47 23l-1.2-3.4L42 18.5l3.8-1.1L47 14Z' fill='%23fff' stroke='none'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- =========================================================
+       图标精灵：全站所有 SVG 图标定义在这里
+       ========================================================= -->
+  <svg class="svg-sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></symbol>
+    <symbol id="i-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.35" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.35" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.35" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3M9 21h6"/></symbol>
+    <symbol id="i-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M8.7 14.2a4.1 4.1 0 0 0 6.6 0"/><path d="M9 9.6h.01M15 9.6h.01" stroke-width="2.4"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="M5.5 11.7 19 5l-4.2 14-3.2-5.6-6.1-1.7Z" fill="currentColor" stroke="none"/><path d="m11.6 13.4 4-4" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="3"/><circle cx="9" cy="9.5" r="1.4"/><path d="m5.5 17 4.2-4.2 3.1 3 2.2-2.2 3.5 3.4"/></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 8.5h3l1.4-2h7.2l1.4 2h3a1.5 1.5 0 0 1 1.5 1.5v8A1.5 1.5 0 0 1 20 19.5H4A1.5 1.5 0 0 1 2.5 18v-8A1.5 1.5 0 0 1 4 8.5Z"/><circle cx="12" cy="13.7" r="3.4"/></symbol>
+    <symbol id="i-redpacket" viewBox="0 0 24 24"><rect x="4" y="3.5" width="16" height="17" rx="3"/><path d="M4.8 4.5c2.2 3.7 4.6 5.5 7.2 5.5s5-1.8 7.2-5.5"/><circle cx="12" cy="13.2" r="2.1"/><path d="M10.8 13.2h2.4"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M8.2 3.8 10 8.1 7.8 10a14.7 14.7 0 0 0 6.2 6.2l1.9-2.2 4.3 1.8-.5 3.1c-.2 1.1-1.2 1.8-2.3 1.6C10.8 19.5 4.5 13.2 3.3 6.6c-.2-1.1.5-2.1 1.6-2.3l3.3-.5Z"/></symbol>
+    <symbol id="i-kaomoji" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M8.4 14.2c.8 1.2 2 1.9 3.6 1.9s2.8-.7 3.6-1.9"/><path d="M9 9.8c.4-.6 1-.9 1.6-.9M15 9.8c-.4-.6-1-.9-1.6-.9"/><path d="m17.8 3.8.4 1.2 1.2.4-1.2.4-.4 1.2-.4-1.2-1.2-.4 1.2-.4.4-1.2Z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-dice" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="8.7" cy="8.7" r="1.15" fill="currentColor" stroke="none"/><circle cx="15.3" cy="8.7" r="1.15" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.15" fill="currentColor" stroke="none"/><circle cx="8.7" cy="15.3" r="1.15" fill="currentColor" stroke="none"/><circle cx="15.3" cy="15.3" r="1.15" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-draw" viewBox="0 0 24 24"><path d="m4 20 1-4.4L16.3 4.3a2.1 2.1 0 0 1 3 3L8 18.5 4 20Z"/><path d="m14.8 5.8 3.4 3.4"/></symbol>
+    <symbol id="i-decide" viewBox="0 0 24 24"><path d="M4 7h3.5c4.8 0 4.1 10 8.9 10H20"/><path d="m17 14 3 3-3 3"/><path d="M4 17h3.5c2 0 3.2-1.7 4.2-4"/><path d="m17 4 3 3-3 3"/><path d="M14.5 7H20"/></symbol>
+    <symbol id="i-location" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.2A7 7 0 0 0 5 9.8C5 14.8 12 21 12 21Z"/><circle cx="12" cy="9.8" r="2.5"/></symbol>
+    <symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V6.3L20 4v11.7"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="15.7" r="2.5"/><path d="M9 9.2 20 7"/></symbol>
+    <symbol id="i-gift" viewBox="0 0 24 24"><rect x="3.5" y="8.5" width="17" height="12" rx="2.5"/><path d="M2.5 8.5h19M12 8.5v12"/><path d="M12 8.5S9.2 3.2 6.7 4.3c-2.2.9-.6 4.2 5.3 4.2ZM12 8.5s2.8-5.3 5.3-4.2c2.2.9.6 4.2-5.3 4.2Z"/></symbol>
+    <symbol id="i-poke" viewBox="0 0 24 24"><path d="M9.2 11.2V5.6a1.7 1.7 0 0 1 3.4 0v4.8"/><path d="M12.6 10.2V4.8a1.7 1.7 0 0 1 3.4 0v5.4"/><path d="M16 10.2V6.7a1.7 1.7 0 0 1 3.4 0v7.4c0 4.3-2.7 6.8-6.7 6.8-3.2 0-4.7-1.5-6.4-4.5l-2.1-3.7a1.7 1.7 0 0 1 2.8-1.9l2 2.2"/><path d="M9.2 11.2v3.2"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+    <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m5 9 7 7 7-7"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="m4 20 1-4.4L16.3 4.3a2.1 2.1 0 0 1 3 3L8 18.5 4 20Z"/><path d="m14.8 5.8 3.4 3.4"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4.5h6V7M6.5 7l1 13h9l1-13M10 11v5M14 11v5"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4M7.5 8.5 12 4l4.5 4.5M4 15v4.5h16V15"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v12M7.5 11.5 12 16l4.5-4.5M4 15v4.5h16V15"/></symbol>
+    <symbol id="i-quote" viewBox="0 0 24 24"><path d="M5 6h6v6H6.5c0 3 1.2 5 3.5 6M14 6h5v6h-4.5c0 3 1.2 5 3.5 6"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="11" height="12" rx="2.5"/><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"/></symbol>
+    <symbol id="i-recall" viewBox="0 0 24 24"><path d="M4 9V4.5M4 9h4.5"/><path d="M4.8 9a8 8 0 1 1-1 6.5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.3 4.3L19 6.8"/></symbol>
+    <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 3c.6 4.7 2.8 7 7.5 7.5-4.7.6-7 2.8-7.5 7.5-.6-4.7-2.8-7-7.5-7.5C9.2 10 11.4 7.7 12 3Z" fill="currentColor" stroke="none"/><path d="M19 16.5c.2 1.8 1.1 2.7 2.9 2.9-1.8.2-2.7 1.1-2.9 2.9-.2-1.8-1.1-2.7-2.9-2.9 1.8-.2 2.7-1.1 2.9-2.9Z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.7 5.8a5 5 0 0 0-7.1 0L12 7.4l-1.6-1.6a5 5 0 0 0-7.1 7.1L12 21l8.7-8.1a5 5 0 0 0 0-7.1Z"/></symbol>
+    <!-- 多梦角版本新增图标 -->
+    <symbol id="i-world" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17"/><path d="M12 3.5c2.4 2.4 3.6 5.3 3.6 8.5S14.4 18.1 12 20.5c-2.4-2.4-3.6-5.3-3.6-8.5S9.6 5.9 12 3.5Z"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M5 4.5h9.5A2.5 2.5 0 0 1 17 7v13H7.5A2.5 2.5 0 0 1 5 17.5v-13Z"/><path d="M5 17.5A2.5 2.5 0 0 1 7.5 15H17"/><path d="M9 8.2h5"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6.5" height="6.5" rx="2"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="2"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="2"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="2"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3.5 7.6a2 2 0 0 1 2-2h3.7l2 2.4h7.3a2 2 0 0 1 2 2v7.4a2 2 0 0 1-2 2H5.5a2 2 0 0 1-2-2V7.6Z"/><path d="M3.5 10.4h17"/></symbol>
+    <!-- 歌单管理：列表图标 -->
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M9 6.5h11M9 12h11M9 17.5h7"/><circle cx="5" cy="6.5" r="1.25" fill="currentColor" stroke="none"/><circle cx="5" cy="12" r="1.25" fill="currentColor" stroke="none"/><circle cx="5" cy="17.5" r="1.25" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20h16"/><rect x="5.4" y="12" width="3.7" height="6" rx="1.2"/><rect x="10.6" y="7.4" width="3.7" height="10.6" rx="1.2"/><rect x="15.8" y="10" width="3.7" height="8" rx="1.2"/></symbol>
+    <symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 3.5a8.5 8.5 0 0 0 0 17c1.5 0 2.2-.9 2.2-1.9 0-1.6-1.6-1.7-1.6-3 0-1 .8-1.7 1.9-1.7h1.6c2.4 0 4.4-1.9 4.4-4.3C20.5 6 16.7 3.5 12 3.5Z"/><circle cx="8.4" cy="9.2" r="1.2" fill="currentColor" stroke="none"/><circle cx="12" cy="7.4" r="1.2" fill="currentColor" stroke="none"/><circle cx="15.6" cy="9.2" r="1.2" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3.4"/><path d="M3.5 19.5c0-3 2.5-5.2 5.5-5.2s5.5 2.2 5.5 5.2"/><path d="M16.2 5.7a3.2 3.2 0 0 1 0 6.1M17.8 14.7c1.8.6 3 2.4 3 4.5"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3.2 2"/></symbol>
+    <symbol id="i-card" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="14" rx="3"/><path d="M7.5 9h5M7.5 12h9M7.5 15h6"/><path d="m17.7 8.1.4 1 1 .4-1 .4-.4 1-.4-1-1-.4 1-.4.4-1Z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.3"/><path d="m16 16 4.5 4.5"/></symbol>
+    <symbol id="i-mute" viewBox="0 0 24 24"><path d="M5 10v4h3l4 3.5v-11L8 10H5Z"/><path d="m16 9 5 6M21 9l-5 6"/></symbol>
+    <symbol id="i-speaker" viewBox="0 0 24 24"><path d="M4 10v4h3l4 3.5v-11L7 10H4Z"/><path d="M15 9a4 4 0 0 1 0 6M17.5 6.5a8 8 0 0 1 0 11"/></symbol>
+    <symbol id="i-hangup" viewBox="0 0 24 24"><path d="M4.5 14.2c4.8-4 10.2-4 15 0l-2 3.3-3.7-1.7.3-3a13 13 0 0 0-4.2 0l.3 3-3.7 1.7-2-3.3Z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10-6.5-10-6.5Z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8.5 5h3v14h-3zM13.5 5h3v14h-3z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-prev" viewBox="0 0 24 24"><path d="M7 5v14" /><path d="M19 5.5v13L9.5 12 19 5.5Z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-next" viewBox="0 0 24 24"><path d="M17 5v14" /><path d="M5 5.5v13L14.5 12 5 5.5Z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-shuffle" viewBox="0 0 24 24"><path d="M4 6h3.2c4.4 0 5 12 9.4 12H20"/><path d="M4 18h3.2c1.6 0 2.6-1.6 3.6-4"/><path d="M4 6h3.2c1.6 0 2.6 1.6 3.6 4"/><path d="m17 3.6 3 2.4-3 2.4M17 15.6l3 2.4-3 2.4"/></symbol>
+    <symbol id="i-repeat" viewBox="0 0 24 24"><path d="M6 4h11a3 3 0 0 1 3 3v6"/><path d="m3.6 7 2.4-3 2.4 3"/><path d="M18 20H7a3 3 0 0 1-3-3v-6"/><path d="m20.4 17-2.4 3-2.4-3"/></symbol>
+    <symbol id="i-repeat-one" viewBox="0 0 24 24"><path d="M6 4h11a3 3 0 0 1 3 3v6"/><path d="m3.6 7 2.4-3 2.4 3"/><path d="M18 20H7a3 3 0 0 1-3-3v-6"/><path d="m20.4 17-2.4 3-2.4-3"/><path d="M12 9.5v5M11 10.4l1-.9"/></symbol>
+    <symbol id="i-volume" viewBox="0 0 24 24"><path d="M4 10v4h3l4 3.5v-11L7 10H4Z"/><path d="M14.5 9.5a3.5 3.5 0 0 1 0 5M17 7a7 7 0 0 1 0 10"/></symbol>
+    <symbol id="i-minimize" viewBox="0 0 24 24"><path d="M6 14h4v4M18 10h-4V6M14 10l6-6M10 14l-6 6"/></symbol>
+    <symbol id="i-expand" viewBox="0 0 24 24"><path d="M10 6v4H6M14 18v-4h4M14 10 6 18M10 14l8-8"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M9 4h6l-1 6 3 3v2H7v-2l3-3-1-6Z"/><path d="M12 15v5"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1v-9.5Z"/></symbol>
+    <!-- 设置：齿轮 -->
+    <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.1"/><path d="M19.2 14.6a1.6 1.6 0 0 0 .3 1.7l.1.1a1.8 1.8 0 1 1-2.6 2.6l-.1-.1a1.6 1.6 0 0 0-1.7-.3 1.6 1.6 0 0 0-.9 1.4v.3a1.8 1.8 0 1 1-3.6 0v-.2a1.6 1.6 0 0 0-1-1.4 1.6 1.6 0 0 0-1.7.3l-.1.1a1.8 1.8 0 1 1-2.6-2.6l.1-.1a1.6 1.6 0 0 0 .3-1.7 1.6 1.6 0 0 0-1.4-.9h-.3a1.8 1.8 0 1 1 0-3.6h.2a1.6 1.6 0 0 0 1.4-1 1.6 1.6 0 0 0-.3-1.7l-.1-.1a1.8 1.8 0 1 1 2.6-2.6l.1.1a1.6 1.6 0 0 0 1.7.3h.1a1.6 1.6 0 0 0 .9-1.4v-.3a1.8 1.8 0 1 1 3.6 0v.2a1.6 1.6 0 0 0 1 1.4 1.6 1.6 0 0 0 1.7-.3l.1-.1a1.8 1.8 0 1 1 2.6 2.6l-.1.1a1.6 1.6 0 0 0-.3 1.7v.1a1.6 1.6 0 0 0 1.4.9h.3a1.8 1.8 0 1 1 0 3.6h-.2a1.6 1.6 0 0 0-1.4 1z"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.8"/><path d="M4.8 20a7.2 7.2 0 0 1 14.4 0"/></symbol>
+    <symbol id="i-envelope" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="3"/><path d="m4.5 8 7.5 5.5L19.5 8"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 9.6h17M8 3.5V6M16 3.5V6"/><circle cx="8.4" cy="13.6" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="13.6" r="1" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-tarot" viewBox="0 0 24 24"><rect x="4" y="3.5" width="11" height="15" rx="2"/><rect x="9" y="6" width="11" height="15" rx="2"/><path d="M14.5 10.5c.3 2 .9 2.6 2.8 2.9-1.9.3-2.5.9-2.8 2.9-.3-2-.9-2.6-2.8-2.9 1.9-.3 2.5-.9 2.8-2.9Z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M5.2 18.8l1.6-1.6M17.2 6.8l1.6-1.6"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.2A8.2 8.2 0 0 1 9.8 4a8.5 8.5 0 1 0 10.2 10.2Z"/></symbol>
+    <symbol id="i-font" viewBox="0 0 24 24"><path d="M5 19 10.4 5h1.2L17 19M7.4 14h7.2"/><path d="M19 17.5h2.5"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11.5A8 8 0 1 0 18 17"/><path d="M20 5.5v6h-6"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5M12 7.8h.01" stroke-width="2.2"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6l-5.4 2.9 1.2-6-4.5-4.2 6.1-.7L12 3Z"/></symbol>
+    <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="M12 19V5M6.5 10.5 12 5l5.5 5.5"/></symbol>
+  </svg>
+
+  <div class="page-aura aura-one" aria-hidden="true"></div>
+  <div class="page-aura aura-two" aria-hidden="true"></div>
+
+  <div class="stage">
+    <!-- 桌面端左侧介绍（移动端隐藏） -->
+    <aside class="intro" aria-label="梦境漫游介绍">
+      <div class="brand-chip"><span class="brand-glyph">✶</span> 梦境漫游 <em>DREAM CARD</em></div>
+      <h1>把想说的话，<br><span>交给字卡。</span></h1>
+      <p class="intro-copy">聊天、抽塔罗、写信、记纪念日、听歌。这里装着只属于你们的一整间小屋。</p>
+      <div class="intro-pills">
+        <span>字卡传讯</span><span>塔罗抽卡</span><span>信箱 · 纪念日 · 音乐</span>
+      </div>
+      <div class="intro-cards" aria-hidden="true">
+        <article class="paper-card paper-card-a">
+          <div class="paper-top"><span>字卡 · 07</span><span>✶</span></div>
+          <p>“不用急，我会一直在。”</p>
+          <small>沈砚的回信</small>
+        </article>
+        <article class="paper-card paper-card-b">
+          <div class="paper-top"><span>字卡 · 19</span><span>♡</span></div>
+          <p>“今天也喜欢你。明天的部分，明天再说。”</p>
+          <small>发送于 21:07</small>
+        </article>
+        <div class="orbit-star orbit-star-a">✶</div>
+        <div class="orbit-star orbit-star-b">✦</div>
+      </div>
+      <p class="privacy-note"><span class="privacy-dot"></span> 所有内容只保存在你的浏览器里</p>
+    </aside>
+
+    <!-- 手机外壳：整个应用都装在这里 -->
+    <div class="phone" id="phone">
+
+      <!-- ===== 应用主体：三个底部 Tab 的内容区 ===== -->
+      <div class="app-body" id="appBody">
+
+        <!-- ---------- Tab 1：主页面 ---------- -->
+        <section class="tab-view is-active" id="tabHome" aria-label="主页面">
+          <header class="app-head">
+            <div class="head-title">
+              <span class="eyebrow">DREAM CARD</span>
+              <h1>梦境漫游</h1>
+            </div>
+            <div class="head-actions">
+              <button class="icon-btn" id="homeThemeBtn" aria-label="切换深浅主题">
+                <svg class="icon"><use href="#i-moon"></use></svg>
+              </button>
+              <button class="icon-btn" id="homeMineBtn" aria-label="我的">
+                <svg class="icon"><use href="#i-user"></use></svg>
+              </button>
+              <button class="icon-btn" id="homeSettingsBtn" aria-label="设置">
+                <svg class="icon"><use href="#i-gear"></use></svg>
+              </button>
+            </div>
+          </header>
+
+          <div class="tab-scroll" id="homeScroll">
+            <!-- ===== 顶部头图卡片：双头像 + 双方名称 + 自定义装饰 ===== -->
+            <section class="hero-card" id="heroCard">
+              <div class="hero-bg" id="heroBg"></div>
+              <button class="hero-bg-btn" type="button" id="heroBgBtn" aria-label="更换头图背景">
+                <svg class="icon"><use href="#i-image"></use></svg>
+              </button>
+              <button class="hero-main" type="button" id="heroSwitch" aria-label="切换或管理梦角">
+                <span class="hero-avatars">
+                  <span class="hero-avatar" id="heroAvatarMe">我</span>
+                  <span class="hero-avatar hero-avatar-char" id="heroAvatarChar">砚</span>
+                </span>
+                <span class="hero-copy">
+                  <span class="hero-me-line">
+                    <span id="heroUserName">我</span><i class="hero-deco" id="heroUserDeco">✦</i>
+                  </span>
+                  <span class="hero-char-line">
+                    <b id="heroCharName">沈砚</b><i class="hero-deco" id="heroCharDeco">❤</i>
+                  </span>
+                  <small id="heroNote">一起待一会儿吧</small>
+                </span>
+                <span class="hero-tags" id="heroTags"></span>
+                <span class="hero-swap"><svg class="icon"><use href="#i-chevron-down"></use></svg></span>
+              </button>
+            </section>
+
+            <!-- ===== 纪念日卡片 + 音乐小组件 ===== -->
+            <div class="home-duo">
+              <button class="duo-card duo-ann" type="button" id="duoAnn" data-page="anniversary">
+                <span class="duo-label">纪念日</span>
+                <b class="ann-big" id="annBig">—</b>
+                <span class="ann-name" id="annName">点这里记下重要的日子</span>
+                <small id="annSub">还没有纪念日</small>
+              </button>
+
+              <section class="duo-card duo-music" id="duoMusic">
+                <span class="duo-label">正在播放</span>
+                <div class="mini-player" id="miniOpen" role="button" tabindex="0" aria-label="打开音乐播放器">
+                  <span class="mini-art" id="miniArt"><svg class="icon"><use href="#i-music"></use></svg></span>
+                  <div class="mini-copy">
+                    <b id="miniTitle">水星记</b>
+                    <small id="miniTime">00:00 / 04:15</small>
+                  </div>
+                </div>
+                <div class="mini-seek" id="miniSeek"><i id="miniSeekFill"></i></div>
+                <div class="mini-controls">
+                  <button class="mini-btn" type="button" id="miniPrev" aria-label="上一首"><svg class="icon"><use href="#i-prev"></use></svg></button>
+                  <button class="mini-btn mini-play" type="button" id="miniPlay" aria-label="播放 / 暂停"><svg class="icon"><use href="#i-play"></use></svg></button>
+                  <button class="mini-btn" type="button" id="miniNext" aria-label="下一首"><svg class="icon"><use href="#i-next"></use></svg></button>
+                  <span class="mini-date" id="miniDate">10月20日 周二</span>
+                </div>
+              </section>
+            </div>
+
+            <!-- ===== 宫格功能入口：2 行 × 4 个 ===== -->
+            <div class="grid-entries" id="gridEntries">
+              <button class="grid-cell" type="button" data-page="chat">
+                <span class="grid-icon tone-violet"><svg class="icon"><use href="#i-card"></use></svg></span>
+                <span class="grid-label">聊天</span>
+              </button>
+              <button class="grid-cell" type="button" data-page="moments">
+                <span class="grid-icon tone-plum"><svg class="icon"><use href="#i-world"></use></svg></span>
+                <span class="grid-label">朋友圈</span>
+              </button>
+              <button class="grid-cell" type="button" data-page="diary">
+                <span class="grid-icon tone-sky"><svg class="icon"><use href="#i-book"></use></svg></span>
+                <span class="grid-label">日记</span>
+              </button>
+              <button class="grid-cell" type="button" data-page="mail">
+                <span class="grid-icon tone-mint"><svg class="icon"><use href="#i-envelope"></use></svg></span>
+                <span class="grid-label">信箱</span>
+              </button>
+              <button class="grid-cell" type="button" data-page="music">
+                <span class="grid-icon tone-peach"><svg class="icon"><use href="#i-music"></use></svg></span>
+                <span class="grid-label">音乐</span>
+              </button>
+              <button class="grid-cell" type="button" data-page="tarot">
+                <span class="grid-icon tone-amber"><svg class="icon"><use href="#i-tarot"></use></svg></span>
+                <span class="grid-label">塔罗</span>
+              </button>
+              <button class="grid-cell" type="button" data-page="calendar">
+                <span class="grid-icon tone-rose"><svg class="icon"><use href="#i-calendar"></use></svg></span>
+                <span class="grid-label">日历</span>
+              </button>
+              <button class="grid-cell" type="button" data-page="cards">
+                <span class="grid-icon tone-violet"><svg class="icon"><use href="#i-sparkle"></use></svg></span>
+                <span class="grid-label">字卡库</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ---------- Tab 2：设置 ---------- -->
+        <section class="tab-view" id="tabSettings" aria-label="设置">
+          <header class="app-head">
+            <div class="head-title">
+              <span class="eyebrow">SETTINGS</span>
+              <h1>设置</h1>
+            </div>
+          </header>
+          <div class="tab-scroll">
+            <!-- 外观 -->
+            <section class="panel-block">
+              <div class="block-head"><b>外观</b><small>背景图 · 主题 · 透明度</small></div>
+              <button class="row-entry" type="button" id="openAppearance">
+                <span class="row-icon"><svg class="icon"><use href="#i-palette"></use></svg></span>
+                <span class="row-copy"><b>外观设置</b><small id="appearanceSub">页面背景、透明度与气泡样式</small></span>
+                <svg class="icon chevron"><use href="#i-chevron"></use></svg>
+              </button>
+              <div class="seg-group" id="themeGroup" role="radiogroup" aria-label="主题">
+                <button class="seg-btn is-active" type="button" data-theme-value="light" role="radio" aria-checked="true">
+                  <svg class="icon"><use href="#i-sun"></use></svg><span>浅色</span>
+                </button>
+                <button class="seg-btn" type="button" data-theme-value="dark" role="radio" aria-checked="false">
+                  <svg class="icon"><use href="#i-moon"></use></svg><span>深色</span>
+                </button>
+              </div>
+            </section>
+
+            <section class="panel-block">
+              <div class="block-head"><b>字体大小</b><small id="fontScaleLabel">标准 100%</small></div>
+              <div class="seg-group seg-group-4" id="fontGroup" role="radiogroup" aria-label="字体大小">
+                <button class="seg-btn" type="button" data-font-value="90" role="radio" aria-checked="false"><span>小</span></button>
+                <button class="seg-btn is-active" type="button" data-font-value="100" role="radio" aria-checked="true"><span>标准</span></button>
+                <button class="seg-btn" type="button" data-font-value="110" role="radio" aria-checked="false"><span>大</span></button>
+                <button class="seg-btn" type="button" data-font-value="120" role="radio" aria-checked="false"><span>特大</span></button>
+              </div>
+            </section>
+
+            <section class="panel-block">
+              <div class="block-head"><b>聊天</b><small>回复 · 主动消息 · 朋友圈</small></div>
+              <button class="row-entry" type="button" id="openChatPrefs">
+                <span class="row-icon"><svg class="icon"><use href="#i-card"></use></svg></span>
+                <span class="row-copy"><b>聊天设置</b><small id="chatPrefsSub">当前角色：沈砚</small></span>
+                <svg class="icon chevron"><use href="#i-chevron"></use></svg>
+              </button>
+            </section>
+
+            <section class="panel-block">
+              <div class="block-head"><b>数据管理</b><small>所有内容都保存在本机浏览器</small></div>
+              <button class="row-entry" type="button" id="exportChatBtn">
+                <span class="row-icon"><svg class="icon"><use href="#i-download"></use></svg></span>
+                <span class="row-copy"><b>导出聊天记录</b><small>把当前梦角的传讯记录存成文件</small></span>
+                <svg class="icon chevron"><use href="#i-chevron"></use></svg>
+              </button>
+              <button class="row-entry" type="button" id="importChatBtn">
+                <span class="row-icon"><svg class="icon"><use href="#i-upload"></use></svg></span>
+                <span class="row-copy"><b>导入聊天记录</b><small>支持本应用导出的 JSON 文件</small></span>
+                <svg class="icon chevron"><use href="#i-chevron"></use></svg>
+              </button>
+              <button class="row-entry" type="button" id="openCallHistory">
+                <span class="row-icon"><svg class="icon"><use href="#i-phone"></use></svg></span>
+                <span class="row-copy"><b>通话历史记录</b><small id="callHistorySub">0 条记录</small></span>
+                <svg class="icon chevron"><use href="#i-chevron"></use></svg>
+              </button>
+              <button class="row-entry danger" type="button" id="clearAllBtn">
+                <span class="row-icon"><svg class="icon"><use href="#i-trash"></use></svg></span>
+                <span class="row-copy"><b>一键清空全部本地缓存</b><small>全部梦角的数据、字卡与歌单都会删除</small></span>
+                <svg class="icon chevron"><use href="#i-chevron"></use></svg>
+              </button>
+              <p class="storage-note" id="storageNote">已使用 <b>0 KB</b> 本地空间</p>
+            </section>
+
+            <section class="panel-block">
+              <div class="block-head"><b>关于本站</b><small>ABOUT</small></div>
+              <div class="about-card">
+                <div class="about-mark">✶</div>
+                <h3>梦境漫游 · Dream Card</h3>
+                <p>一个纯前端的小小世界。不联网、不登录、不上传，所有字卡、信件与记忆都只留在你这台设备的浏览器里。</p>
+                <ul>
+                  <li>多梦角：每位梦角拥有独立的聊天、信箱、塔罗与日记</li>
+                  <li>朋友圈 · 日记 · 日历 · 信箱 · 音乐 · 塔罗 · 字卡库</li>
+                  <li>数据可用「一键清空」随时抹去</li>
+                </ul>
+                <small class="about-version">Version 3.0 · 本地离线运行</small>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <!-- ---------- Tab 3：我的 ---------- -->
+        <section class="tab-view" id="tabMine" aria-label="我的">
+          <header class="app-head">
+            <div class="head-title">
+              <span class="eyebrow">MY SPACE</span>
+              <h1>我的</h1>
+            </div>
+          </header>
+          <div class="tab-scroll">
+            <!-- 我的资料：会显示在主页头图里 -->
+            <section class="panel-block">
+              <div class="block-head"><b>我的资料</b><small>主页头图上的名字与头像</small></div>
+              <button class="mine-profile" type="button" id="mineProfile">
+                <span class="avatar user-avatar" id="mineUserAvatar">我</span>
+                <span class="mine-profile-copy">
+                  <b><span id="mineUserName">我</span><i class="hero-deco" id="mineUserDeco">✦</i></b>
+                  <small>点击编辑昵称、头像与装饰图案</small>
+                </span>
+                <svg class="icon chevron"><use href="#i-chevron"></use></svg>
+              </button>
+            </section>
+
+            <!-- 梦角设置：切换 / 新增 / 编辑 / 删除梦角 -->
+            <section class="panel-block">
+              <div class="block-head"><b>梦角设置</b><small id="charCountLabel">共 1 位</small></div>
+              <button class="row-entry" type="button" id="openCharManager">
+                <span class="row-icon"><svg class="icon"><use href="#i-users"></use></svg></span>
+                <span class="row-copy"><b>梦角管理与切换</b><small id="charManagerSub">当前：沈砚</small></span>
+                <svg class="icon chevron"><use href="#i-chevron"></use></svg>
+              </button>
+            </section>
+
+            <!-- 收藏的传讯记录 -->
+            <section class="panel-block">
+              <div class="block-head"><b>收藏传讯记录</b><small id="favCountLabel">0 条</small></div>
+              <div class="list-slot" id="favList"></div>
+            </section>
+
+            <!-- 当前梦角的数据概览 -->
+            <section class="panel-block">
+              <div class="block-head"><b>数据概览</b><small id="mineStatsSub">当前梦角</small></div>
+              <div class="stat-grid" id="mineStats"></div>
+            </section>
+          </div>
+        </section>
+      </div>
+
+      <!-- ===== 底部固定导航：主页面 / 设置 / 我的（三个 Tab） ===== -->
+      <nav class="bottom-nav" id="bottomNav" aria-label="主导航">
+        <button class="nav-item is-active" type="button" data-tab="home" aria-current="page">
+          <svg class="icon"><use href="#i-home"></use></svg>
+          <span>主页面</span>
+        </button>
+        <button class="nav-item" type="button" data-tab="settings">
+          <svg class="icon"><use href="#i-gear"></use></svg>
+          <span>设置</span>
+        </button>
+        <button class="nav-item" type="button" data-tab="mine">
+          <svg class="icon"><use href="#i-user"></use></svg>
+          <span>我的</span>
+        </button>
+      </nav>
+
+      <!-- =========================================================
+           子页面：从主页面卡片进入，返回键回到主页面
+           ========================================================= -->
+
+      <!-- ---------- 子页面：聊天传讯 ---------- -->
+      <section class="subpage" id="pageChat" aria-hidden="true">
+        <div class="subpage-panel">
+          <header class="topbar">
+            <button class="icon-btn back-btn" id="backBtn" aria-label="返回主页面">
+              <svg class="icon"><use href="#i-back"></use></svg>
+            </button>
+            <div class="chat-title">
+              <div class="title-line">
+                <h1 id="charNameLabel">沈砚</h1>
+                <span class="online-dot"></span>
+              </div>
+              <p id="chatSubtitle">在字卡里等你 · 在线</p>
+            </div>
+            <button class="icon-btn more-btn" id="moreBtn" aria-label="更多设置">
+              <svg class="icon"><use href="#i-more"></use></svg>
+              <span class="more-badge" id="moreBadge" hidden></span>
+            </button>
+          </header>
+
+          <main class="chat" id="chat" aria-label="聊天记录">
+            <div class="message-list" id="messageList"></div>
+          </main>
+
+          <button class="scroll-down" id="scrollDown" aria-label="回到最新消息" hidden>
+            <svg class="icon"><use href="#i-arrow-up"></use></svg>
+            <span>新消息</span>
+          </button>
+
+          <div class="dock" id="dock">
+            <section class="aux-panel tool-panel" id="toolPanel" aria-hidden="true">
+              <div class="tool-panel-head">
+                <!-- 切换「我发给 TA」/「TA 发给我的」 -->
+                <div class="tool-mode" id="toolMode" role="tablist" aria-label="互动方向">
+                  <button class="tool-mode-btn is-active" type="button" data-mode="me" role="tab" aria-selected="true">我发给 TA</button>
+                  <button class="tool-mode-btn" type="button" data-mode="char" role="tab" aria-selected="false">TA 发给我</button>
+                </div>
+                <span class="swipe-hint">左右滑动</span>
+              </div>
+
+              <!-- 我来发送的工具：两页 -->
+              <div class="tools-scroll" id="toolsScrollMe">
+                <div class="tool-page">
+                  <button class="tool-item" data-tool="image" type="button">
+                    <span class="tool-icon tone-pink"><svg class="icon"><use href="#i-image"></use></svg></span>
+                    <span class="tool-label">图片</span>
+                  </button>
+                  <button class="tool-item" data-tool="camera" type="button">
+                    <span class="tool-icon tone-blue"><svg class="icon"><use href="#i-camera"></use></svg></span>
+                    <span class="tool-label">拍照</span>
+                  </button>
+                  <button class="tool-item" data-tool="redpacket" type="button">
+                    <span class="tool-icon tone-red"><svg class="icon"><use href="#i-redpacket"></use></svg></span>
+                    <span class="tool-label">红包</span>
+                  </button>
+                  <button class="tool-item" data-tool="call" type="button">
+                    <span class="tool-icon tone-green"><svg class="icon"><use href="#i-phone"></use></svg></span>
+                    <span class="tool-label">通话</span>
+                  </button>
+                  <button class="tool-item" data-tool="kaomoji" type="button">
+                    <span class="tool-icon tone-lilac"><svg class="icon"><use href="#i-kaomoji"></use></svg></span>
+                    <span class="tool-label">颜文字</span>
+                  </button>
+                  <button class="tool-item" data-tool="dice" type="button">
+                    <span class="tool-icon tone-amber"><svg class="icon"><use href="#i-dice"></use></svg></span>
+                    <span class="tool-label">骰子</span>
+                  </button>
+                  <button class="tool-item" data-tool="draw" type="button">
+                    <span class="tool-icon tone-mint"><svg class="icon"><use href="#i-draw"></use></svg></span>
+                    <span class="tool-label">涂鸦</span>
+                  </button>
+                  <button class="tool-item" data-tool="decide" type="button">
+                    <span class="tool-icon tone-peach"><svg class="icon"><use href="#i-decide"></use></svg></span>
+                    <span class="tool-label">帮我抉择</span>
+                  </button>
+                </div>
+                <div class="tool-page">
+                  <button class="tool-item" data-tool="location" type="button">
+                    <span class="tool-icon tone-sky"><svg class="icon"><use href="#i-location"></use></svg></span>
+                    <span class="tool-label">位置</span>
+                  </button>
+                  <button class="tool-item" data-tool="music" type="button">
+                    <span class="tool-icon tone-violet"><svg class="icon"><use href="#i-music"></use></svg></span>
+                    <span class="tool-label">音乐</span>
+                  </button>
+                  <button class="tool-item" data-tool="gift" type="button">
+                    <span class="tool-icon tone-rose"><svg class="icon"><use href="#i-gift"></use></svg></span>
+                    <span class="tool-label">礼物</span>
+                  </button>
+                  <button class="tool-item" data-tool="poke" type="button">
+                    <span class="tool-icon tone-gold"><svg class="icon"><use href="#i-poke"></use></svg></span>
+                    <span class="tool-label">戳一戳</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- TA 发给我：角色互动 -->
+              <div class="tools-scroll" id="toolsScrollChar" hidden>
+                <div class="tool-page tool-page-char">
+                  <button class="tool-item" data-tool="charRedpacket" type="button">
+                    <span class="tool-icon tone-red"><svg class="icon"><use href="#i-redpacket"></use></svg></span>
+                    <span class="tool-label">TA 发红包</span>
+                  </button>
+                  <button class="tool-item" data-tool="charDoodle" type="button">
+                    <span class="tool-icon tone-mint"><svg class="icon"><use href="#i-draw"></use></svg></span>
+                    <span class="tool-label">TA 的涂鸦</span>
+                  </button>
+                  <button class="tool-item" data-tool="charGift" type="button">
+                    <span class="tool-icon tone-rose"><svg class="icon"><use href="#i-gift"></use></svg></span>
+                    <span class="tool-label">TA 送礼物</span>
+                  </button>
+                  <button class="tool-item" data-tool="charPoke" type="button">
+                    <span class="tool-icon tone-gold"><svg class="icon"><use href="#i-poke"></use></svg></span>
+                    <span class="tool-label">TA 戳一戳</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="tool-dots" id="toolDotsMe" role="tablist" aria-label="工具分页">
+                <button class="tool-dot active" data-page="0" aria-label="第一页"></button>
+                <button class="tool-dot" data-page="1" aria-label="第二页"></button>
+              </div>
+            </section>
+
+            <section class="aux-panel emoji-panel" id="emojiPanel" aria-hidden="true">
+              <div class="emoji-panel-head">
+                <div class="emoji-tabs" role="tablist" aria-label="表情分类">
+                  <button class="emoji-tab active" data-emoji-tab="emoji" role="tab">表情</button>
+                  <button class="emoji-tab" data-emoji-tab="kaomoji" role="tab">颜文字</button>
+                </div>
+                <button class="mini-close" id="closeEmoji" aria-label="关闭表情面板">
+                  <svg class="icon"><use href="#i-close"></use></svg>
+                </button>
+              </div>
+              <div class="emoji-scroll">
+                <div class="emoji-grid" id="emojiGrid"></div>
+                <div class="kaomoji-grid" id="kaomojiGrid" hidden></div>
+              </div>
+            </section>
+
+            <div class="composer" id="composer">
+              <div class="quote-draft" id="quoteDraft" hidden>
+                <div class="quote-draft-copy">
+                  <span class="quote-draft-label">引用 <b id="quoteDraftName"></b></span>
+                  <p id="quoteDraftText"></p>
+                </div>
+                <button class="quote-draft-close" id="quoteDraftClose" aria-label="取消引用">
+                  <svg class="icon"><use href="#i-close"></use></svg>
+                </button>
+              </div>
+              <div class="composer-row">
+                <button class="round-btn mic-btn" id="micBtn" aria-label="按住说话">
+                  <svg class="icon"><use href="#i-mic"></use></svg>
+                </button>
+                <button class="round-btn emoji-btn" id="emojiBtn" aria-label="表情">
+                  <svg class="icon"><use href="#i-smile"></use></svg>
+                </button>
+                <div class="input-wrap">
+                  <textarea id="messageInput" rows="1" maxlength="1200" placeholder="说点什么…" aria-label="消息内容"></textarea>
+                </div>
+                <button class="send-btn" id="sendBtn" aria-label="发送消息" disabled>
+                  <svg class="icon"><use href="#i-send"></use></svg>
+                </button>
+                <button class="round-btn plus-btn" id="plusBtn" aria-label="更多功能">
+                  <svg class="icon"><use href="#i-plus"></use></svg>
+                </button>
+              </div>
+              <div class="recording-hint" id="recordingHint" hidden>
+                <span class="record-dot"></span>
+                <span>正在录音</span>
+                <b id="recordTime">00:00</b>
+                <span class="record-tip">松开即可发送</span>
+              </div>
+            </div>
+
+            <div class="panel-scrim" id="panelScrim" hidden></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------- 子页面：塔罗传讯字卡 ---------- -->
+      <section class="subpage" id="pageTarot" aria-hidden="true">
+        <div class="subpage-panel">
+          <header class="page-head">
+            <button class="icon-btn" data-back aria-label="返回主页面">
+              <svg class="icon"><use href="#i-back"></use></svg>
+            </button>
+            <div class="page-title"><span class="eyebrow">TAROT</span><h2>塔罗传讯字卡</h2></div>
+            <div class="page-actions">
+              <button class="icon-btn" id="tarotFavBtn" aria-label="只看收藏">
+                <svg class="icon"><use href="#i-star"></use></svg>
+              </button>
+            </div>
+          </header>
+          <div class="page-scroll" id="tarotScroll">
+            <section class="tarot-draw">
+              <div class="tarot-orbit" aria-hidden="true">
+                <span class="tarot-deck" id="tarotDeck">
+                  <i></i><i></i><i></i>
+                </span>
+              </div>
+              <label class="field-card">
+                <span>想问的问题（可留空）</span>
+                <input id="tarotQuestion" type="text" maxlength="40" placeholder="例如：这段关系接下来会怎样？">
+              </label>
+              <div class="draw-scope-wrap">
+                <span class="draw-scope-label">抽卡范围</span>
+                <div class="draw-scope" id="tarotScopeBar"></div>
+              </div>
+              <div class="tarot-actions">
+                <button class="small-primary" id="drawOneBtn" type="button">抽一张</button>
+                <button class="ghost-btn" id="drawThreeBtn" type="button">抽三张</button>
+              </div>
+              <p class="tarot-hint">抽到的每句话都可以收藏，记录会保存在本机。抽卡范围跟随字卡分类。</p>
+            </section>
+
+            <section class="tarot-result" id="tarotResult" hidden></section>
+
+            <section class="panel-block">
+              <div class="block-head">
+                <b>抽卡记录</b>
+                <small id="tarotRecordCount">0 条</small>
+              </div>
+              <div class="list-slot" id="tarotRecordList"></div>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------- 子页面：信箱 ---------- -->
+      <section class="subpage" id="pageMail" aria-hidden="true">
+        <div class="subpage-panel">
+          <header class="page-head">
+            <button class="icon-btn" id="mailBack" data-back aria-label="返回">
+              <svg class="icon"><use href="#i-back"></use></svg>
+            </button>
+            <div class="page-title"><span class="eyebrow">MAILBOX</span><h2 id="mailTitle">信箱</h2></div>
+            <div class="page-actions" id="mailActions">
+              <button class="icon-btn" id="mailComposeBtn" aria-label="写一封信">
+                <svg class="icon"><use href="#i-plus"></use></svg>
+              </button>
+            </div>
+          </header>
+
+          <!-- 列表视图 -->
+          <div class="page-scroll" id="mailListView">
+            <div class="mail-hero">
+              <svg class="icon"><use href="#i-envelope"></use></svg>
+              <div>
+                <b>写给 TA 的信</b>
+                <p>写下想慢慢说的话，它会安静地躺在信箱里。</p>
+              </div>
+            </div>
+            <div class="list-slot" id="mailList"></div>
+          </div>
+
+          <!-- 编辑 / 阅读视图 -->
+          <div class="page-scroll mail-editor" id="mailEditorView" hidden>
+            <label class="field-card">
+              <span>标题</span>
+              <input id="mailTitleInput" type="text" maxlength="40" placeholder="给这封信起个名字">
+            </label>
+            <label class="field-card">
+              <span>正文</span>
+              <textarea id="mailBodyInput" maxlength="2000" rows="10" placeholder="亲爱的你：&#10;&#10;写点什么吧…"></textarea>
+            </label>
+            <div class="editor-meta" id="mailEditorMeta"></div>
+            <div class="mail-editor-actions">
+              <button class="ghost-btn" id="mailCancelBtn" type="button">取消</button>
+              <button class="small-primary" id="mailSaveBtn" type="button">保存信件</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------- 子页面：纪念日 ---------- -->
+      <section class="subpage" id="pageAnniversary" aria-hidden="true">
+        <div class="subpage-panel">
+          <header class="page-head">
+            <button class="icon-btn" data-back aria-label="返回主页面">
+              <svg class="icon"><use href="#i-back"></use></svg>
+            </button>
+            <div class="page-title"><span class="eyebrow">ANNIVERSARY</span><h2>纪念日</h2></div>
+            <div class="page-actions">
+              <button class="icon-btn" id="annAddBtn" aria-label="新增纪念日">
+                <svg class="icon"><use href="#i-plus"></use></svg>
+              </button>
+            </div>
+          </header>
+          <div class="page-scroll">
+            <div class="list-slot" id="annList"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------- 子页面：音乐播放器 ---------- -->
+      <section class="subpage" id="pageMusic" aria-hidden="true">
+        <div class="subpage-panel">
+          <header class="page-head">
+            <button class="icon-btn" data-back aria-label="返回主页面">
+              <svg class="icon"><use href="#i-back"></use></svg>
+            </button>
+            <div class="page-title"><span class="eyebrow">MUSIC</span><h2>音乐播放器</h2></div>
+            <div class="page-actions">
+              <button class="icon-btn" id="musicAddBtn" aria-label="新增歌曲">
+                <svg class="icon"><use href="#i-plus"></use></svg>
+              </button>
+            </div>
+          </header>
+          <div class="page-scroll">
+            <!-- 正在播放 -->
+            <section class="player-card">
+              <!-- 播放器上的歌单管理入口 -->
+              <button class="player-manage" id="openPlaylistBtn" type="button" aria-label="打开歌单管理">
+                <svg class="icon"><use href="#i-list"></use></svg>
+                <span>歌单管理</span>
+              </button>
+              <div class="player-art" id="playerArt">
+                <svg class="icon"><use href="#i-music"></use></svg>
+                <span class="player-art-star">✶</span>
+              </div>
+              <div class="player-info">
+                <b id="playerTitle">还没有歌曲</b>
+                <small id="playerArtist">点「歌单管理」或右上角 + 添加</small>
+              </div>
+              <div class="player-progress">
+                <span id="playerCurrent">00:00</span>
+                <input id="playerSeek" type="range" min="0" max="100" value="0" step="0.1" aria-label="播放进度">
+                <span id="playerDuration">00:00</span>
+              </div>
+              <div class="player-controls">
+                <button class="player-side" id="playerMode" aria-label="播放模式">
+                  <svg class="icon"><use href="#i-repeat"></use></svg>
+                </button>
+                <button class="player-btn" id="playerPrev" aria-label="上一首">
+                  <svg class="icon"><use href="#i-prev"></use></svg>
+                </button>
+                <button class="player-play" id="playerPlay" aria-label="播放/暂停">
+                  <svg class="icon"><use href="#i-play"></use></svg>
+                </button>
+                <button class="player-btn" id="playerNext" aria-label="下一首">
+                  <svg class="icon"><use href="#i-next"></use></svg>
+                </button>
+                <button class="player-side" id="playerVolumeIcon" aria-label="音量">
+                  <svg class="icon"><use href="#i-volume"></use></svg>
+                </button>
+              </div>
+              <div class="volume-row">
+                <svg class="icon"><use href="#i-volume"></use></svg>
+                <input id="playerVolume" type="range" min="0" max="100" value="60" step="1" aria-label="音量">
+                <span id="playerVolumeLabel">60%</span>
+              </div>
+              <p class="player-note" id="playerNote">支持音频链接与本地文件，歌单会跟随当前梦角独立保存。</p>
+            </section>
+
+            <!-- 歌单 -->
+            <section class="panel-block">
+              <div class="block-head"><b>歌单</b><small id="playlistCount">0 首</small></div>
+              <div class="list-slot" id="playlist"></div>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------- 子页面：字卡库 ---------- -->
+      <section class="subpage" id="pageCards" aria-hidden="true">
+        <div class="subpage-panel">
+          <header class="page-head">
+            <button class="icon-btn" id="closeCards" data-back aria-label="返回">
+              <svg class="icon"><use href="#i-back"></use></svg>
+            </button>
+            <div class="page-title"><span class="eyebrow">WORD CARD</span><h2>字卡库 <em id="cardCountLabel">0</em></h2></div>
+            <div class="page-actions">
+              <button class="icon-btn" id="manageCatsBtn" aria-label="分类管理">
+                <svg class="icon"><use href="#i-folder"></use></svg>
+              </button>
+              <button class="icon-btn" id="newCardBtn" aria-label="新增字卡">
+                <svg class="icon"><use href="#i-plus"></use></svg>
+              </button>
+              <button class="icon-btn" id="importCardsBtn" aria-label="导入字卡">
+                <svg class="icon"><use href="#i-upload"></use></svg>
+              </button>
+              <button class="icon-btn" id="exportCardsBtn" aria-label="导出字卡">
+                <svg class="icon"><use href="#i-download"></use></svg>
+              </button>
+            </div>
+          </header>
+          <div class="page-scroll" id="cardsBody">
+            <!-- 无分类时的引导 -->
+            <section class="cat-guide" id="catGuide" hidden>
+              <div class="cat-guide-copy">
+                <b>还没有字卡分类</b>
+                <p>建一个分类，把字卡按主题收好；抽卡时也能只从某个分类里抽。</p>
+              </div>
+              <button class="small-primary" id="createCatBtn" type="button">＋ 新增分类</button>
+            </section>
+
+            <!-- 横向滑动的分类筛选栏 -->
+            <div class="cat-bar" id="catBar" aria-label="字卡分类"></div>
+
+            <div class="library-toolbar">
+              <label class="search-box">
+                <svg class="icon"><use href="#i-search"></use></svg>
+                <input id="cardSearch" type="search" placeholder="搜索字卡内容 / 备注" autocomplete="off">
+              </label>
+              <span class="visible-count" id="visibleCardCount">0 张</span>
+            </div>
+            <div class="card-list" id="cardList"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------- 子页面：朋友圈 ---------- -->
+      <section class="subpage" id="pageMoments" aria-hidden="true">
+        <div class="subpage-panel">
+          <header class="page-head">
+            <button class="icon-btn" data-back aria-label="返回">
+              <svg class="icon"><use href="#i-back"></use></svg>
+            </button>
+            <div class="page-title"><span class="eyebrow">MOMENTS</span><h2>朋友圈</h2></div>
+            <div class="page-actions">
+              <button class="icon-btn" id="momentCharBtn" aria-label="让 TA 发一条">
+                <svg class="icon"><use href="#i-heart"></use></svg>
+              </button>
+            </div>
+          </header>
+          <div class="page-scroll" id="momentsScroll">
+            <section class="panel-block">
+              <div class="block-head"><b>发一条动态</b><small>我的朋友圈</small></div>
+              <textarea class="block-textarea" id="momentInput" maxlength="600" rows="3" placeholder="今天想说的话…"></textarea>
+              <div class="compose-actions">
+                <button class="ghost-btn" id="momentImageBtn" type="button">
+                  <svg class="icon"><use href="#i-image"></use></svg><span>配图</span>
+                </button>
+                <span class="compose-thumb" id="momentThumb" hidden>
+                  <img id="momentThumbImg" alt="配图预览">
+                  <button type="button" id="momentThumbClear" aria-label="移除配图">
+                    <svg class="icon"><use href="#i-close"></use></svg>
+                  </button>
+                </span>
+                <button class="small-primary" id="momentPostBtn" type="button">发布</button>
+              </div>
+            </section>
+            <section class="panel-block">
+              <div class="block-head"><b>动态</b><small id="momentCountLabel">0 条</small></div>
+              <div class="list-slot" id="momentsList"></div>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------- 子页面：日记 ---------- -->
+      <section class="subpage" id="pageDiary" aria-hidden="true">
+        <div class="subpage-panel">
+          <header class="page-head">
+            <button class="icon-btn" data-back aria-label="返回">
+              <svg class="icon"><use href="#i-back"></use></svg>
+            </button>
+            <div class="page-title"><span class="eyebrow">DIARY</span><h2>日记</h2></div>
+            <div class="page-actions">
+              <button class="icon-btn" id="diaryAddBtn" aria-label="写一篇日记">
+                <svg class="icon"><use href="#i-plus"></use></svg>
+              </button>
+            </div>
+          </header>
+          <div class="page-scroll" id="diaryScroll">
+            <section class="panel-block">
+              <div class="block-head"><b>我的日记</b><small id="diaryCountLabel">0 篇</small></div>
+              <div class="list-slot" id="diaryList"></div>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------- 子页面：日历（例假周期 / 重要事件） ---------- -->
+      <section class="subpage" id="pageCalendar" aria-hidden="true">
+        <div class="subpage-panel">
+          <header class="page-head">
+            <button class="icon-btn" data-back aria-label="返回">
+              <svg class="icon"><use href="#i-back"></use></svg>
+            </button>
+            <div class="page-title"><span class="eyebrow">CALENDAR</span><h2>日历</h2></div>
+            <div class="page-actions">
+              <button class="icon-btn" id="calAddBtn" aria-label="新增记录">
+                <svg class="icon"><use href="#i-plus"></use></svg>
+              </button>
+            </div>
+          </header>
+          <div class="page-scroll" id="calendarScroll">
+            <section class="panel-block">
+              <div class="cal-head">
+                <button class="icon-btn cal-nav" id="calPrev" aria-label="上个月"><svg class="icon"><use href="#i-chevron"></use></svg></button>
+                <b id="calMonth">2026 年 10 月</b>
+                <button class="icon-btn cal-nav" id="calNext" aria-label="下个月"><svg class="icon"><use href="#i-chevron"></use></svg></button>
+              </div>
+              <div class="cal-week"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div>
+              <div class="cal-grid" id="calGrid"></div>
+              <div class="cal-legend">
+                <span><i class="cal-dot dot-period"></i>例假周期</span>
+                <span><i class="cal-dot dot-event"></i>重要事件</span>
+                <span><i class="cal-dot dot-custom"></i>自定义</span>
+              </div>
+            </section>
+            <section class="panel-block">
+              <div class="block-head"><b id="calDayTitle">今日</b><small id="calDayCount">0 条</small></div>
+              <div class="list-slot" id="calDayList"></div>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------- 子页面：外观设置 ---------- -->
+      <section class="subpage" id="pageAppearance" aria-hidden="true">
+        <div class="subpage-panel">
+          <header class="page-head">
+            <button class="icon-btn" data-back aria-label="返回">
+              <svg class="icon"><use href="#i-back"></use></svg>
+            </button>
+            <div class="page-title"><span class="eyebrow">APPEARANCE</span><h2>外观设置</h2></div>
+          </header>
+          <div class="page-scroll" id="appearanceScroll">
+            <section class="panel-block">
+              <div class="block-head"><b>深浅主题</b><small>立刻生效</small></div>
+              <div class="seg-group" id="appearanceThemeGroup" role="radiogroup" aria-label="主题">
+                <button class="seg-btn is-active" type="button" data-theme-value="light" role="radio" aria-checked="true">
+                  <svg class="icon"><use href="#i-sun"></use></svg><span>浅色</span>
+                </button>
+                <button class="seg-btn" type="button" data-theme-value="dark" role="radio" aria-checked="false">
+                  <svg class="icon"><use href="#i-moon"></use></svg><span>深色</span>
+                </button>
+              </div>
+            </section>
+
+            <section class="panel-block">
+              <div class="block-head"><b>背景图</b><small>点一下即可上传或移除</small></div>
+              <div class="bg-grid" id="bgGrid">
+                <button class="bg-slot" type="button" data-bg="pageBg">
+                  <span class="bg-preview"></span><b>页面背景</b><small>整页底图</small>
+                </button>
+                <button class="bg-slot" type="button" data-bg="heroBg">
+                  <span class="bg-preview"></span><b>主页头图</b><small>顶部大卡片</small>
+                </button>
+                <button class="bg-slot" type="button" data-bg="annCardBg">
+                  <span class="bg-preview"></span><b>纪念日卡片</b><small>主页左卡片</small>
+                </button>
+                <button class="bg-slot" type="button" data-bg="musicCardBg">
+                  <span class="bg-preview"></span><b>音乐卡片</b><small>主页右卡片</small>
+                </button>
+              </div>
+            </section>
+
+            <section class="panel-block">
+              <div class="block-head"><b>透明度调节</b><small id="alphaLabel">100%</small></div>
+              <input class="range" id="alphaRange" type="range" min="40" max="100" step="1" value="100" aria-label="卡片透明度">
+              <p class="tarot-hint">调低后卡片会更通透，背景图更明显。</p>
+            </section>
+
+            <section class="panel-block">
+              <div class="block-head"><b>气泡 CSS 自定义</b><small>高级玩法</small></div>
+              <textarea class="block-textarea mono" id="bubbleCssInput" rows="5" placeholder=".bubble { border-radius: 18px; }"></textarea>
+              <div class="compose-actions">
+                <button class="ghost-btn" id="bubbleCssReset" type="button">恢复默认</button>
+                <button class="small-primary" id="bubbleCssSave" type="button">应用样式</button>
+              </div>
+              <p class="tarot-hint">可用选择器：.bubble、.msg-row.me .bubble、.char-avatar 等。</p>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------- 子页面：消息统计 ---------- -->
+      <section class="subpage" id="pageStats" aria-hidden="true">
+        <div class="subpage-panel">
+          <header class="page-head">
+            <button class="icon-btn" data-back aria-label="返回">
+              <svg class="icon"><use href="#i-back"></use></svg>
+            </button>
+            <div class="page-title"><span class="eyebrow">STATS</span><h2>消息统计</h2></div>
+          </header>
+          <div class="page-scroll" id="statsScroll">
+            <section class="panel-block">
+              <div class="block-head"><b id="statsCharName">沈砚</b><small>当前梦角</small></div>
+              <div class="stat-grid" id="statsGrid"></div>
+            </section>
+            <section class="panel-block">
+              <div class="block-head"><b>全部梦角</b><small>数据对比</small></div>
+              <div class="list-slot" id="statsCharList"></div>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------- 子页面：通话历史记录 ---------- -->
+      <section class="subpage" id="pageCallHistory" aria-hidden="true">
+        <div class="subpage-panel">
+          <header class="page-head">
+            <button class="icon-btn" data-back aria-label="返回">
+              <svg class="icon"><use href="#i-back"></use></svg>
+            </button>
+            <div class="page-title"><span class="eyebrow">CALLS</span><h2>通话历史记录</h2></div>
+            <div class="page-actions"><span class="page-count" id="callPageCount">0 次</span></div>
+          </header>
+          <div class="page-scroll" id="callScroll">
+            <section class="panel-block">
+              <div class="list-slot" id="callList"></div>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           浮层：设置面板、消息操作、通话、通用弹窗、提示
+           ========================================================= -->
+
+      <!-- 聊天设置面板 -->
+      <div class="settings-layer" id="settingsLayer" aria-hidden="true">
+        <div class="layer-backdrop" data-close-settings></div>
+        <section class="settings-sheet" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+          <div class="sheet-grab" aria-hidden="true"></div>
+          <header class="sheet-head">
+            <div>
+              <span class="eyebrow">CHAT SETTINGS</span>
+              <h2 id="settingsTitle">聊天设置</h2>
+            </div>
+            <button class="icon-btn sheet-close" id="closeSettings" aria-label="关闭设置">
+              <svg class="icon"><use href="#i-close"></use></svg>
+            </button>
+          </header>
+          <div class="sheet-body">
+            <section class="setting-section">
+              <div class="section-heading">
+                <span>角色</span>
+                <small>TA 的名字，与你的称呼</small>
+              </div>
+              <div class="identity-editor">
+                <div class="avatar char-avatar settings-avatar" id="settingsAvatar">砚</div>
+                <div class="identity-fields">
+                  <label class="field-card">
+                    <span>角色名</span>
+                    <input id="charNameInput" type="text" maxlength="12" autocomplete="off">
+                  </label>
+                  <label class="field-card">
+                    <span>我的昵称</span>
+                    <input id="userNameInput" type="text" maxlength="12" autocomplete="off">
+                  </label>
+                </div>
+              </div>
+            </section>
+
+            <section class="setting-section">
+              <div class="section-heading">
+                <span>回应方式</span>
+                <small>字卡会以几条消息来到你身边</small>
+              </div>
+              <div class="reply-range">
+                <div class="setting-row">
+                  <div class="setting-copy">
+                    <label for="replyMinInput">最少条数</label>
+                  </div>
+                  <div class="stepper">
+                    <button type="button" id="replyMinMinus" aria-label="减少最少条数">−</button>
+                    <input id="replyMinInput" type="number" min="1" max="6" inputmode="numeric" value="1">
+                    <button type="button" id="replyMinPlus" aria-label="增加最少条数">+</button>
+                  </div>
+                </div>
+                <div class="setting-row">
+                  <div class="setting-copy">
+                    <label for="replyMaxInput">最多条数</label>
+                  </div>
+                  <div class="stepper">
+                    <button type="button" id="replyMaxMinus" aria-label="减少最多条数">−</button>
+                    <input id="replyMaxInput" type="number" min="1" max="6" inputmode="numeric" value="2">
+                    <button type="button" id="replyMaxPlus" aria-label="增加最多条数">+</button>
+                  </div>
+                </div>
+              </div>
+              <p class="range-note" id="replyModeHint">每次回复 1 – 2 条，像连发的短句</p>
+            </section>
+
+            <section class="setting-section" id="replyDelaySection">
+              <div class="section-heading">
+                <span><i class="sec-emoji">💬</i>回复时长</span>
+                <small>从发出消息，到收到第一张字卡</small>
+              </div>
+              <div class="delay-grid">
+                <label class="field-card delay-card">
+                  <span>最少延迟</span>
+                  <div class="input-with-unit"><input id="minSecondsInput" type="number" min="1" max="600" step="1" inputmode="numeric"><em>秒</em></div>
+                </label>
+                <label class="field-card delay-card">
+                  <span>最多延迟</span>
+                  <div class="input-with-unit"><input id="maxSecondsInput" type="number" min="1" max="600" step="1" inputmode="numeric"><em>秒</em></div>
+                </label>
+              </div>
+              <div class="delay-preview">
+                <svg class="icon"><use href="#i-clock"></use></svg>
+                <p id="delayPreview">TA 将在 3 秒 – 15 秒内回应你</p>
+              </div>
+            </section>
+
+            <section class="setting-section" id="proactiveMsgSection">
+              <div class="section-heading">
+                <span><i class="sec-emoji">⏰</i>主动消息</span>
+                <small>TA 会自己来找你</small>
+              </div>
+              <div class="setting-row">
+                <div class="setting-copy">
+                  <label for="proactiveMsgToggle">主动发消息</label>
+                  <p>关闭后 TA 不会主动发来消息</p>
+                </div>
+                <button class="toggle" id="proactiveMsgToggle" type="button" role="switch" aria-checked="true" aria-label="主动消息"><i></i></button>
+              </div>
+              <div class="delay-grid interval-grid">
+                <label class="field-card delay-card">
+                  <span>最短间隔</span>
+                  <div class="input-with-unit"><input id="proactiveMsgMinInput" type="number" min="1" max="1440" step="1" inputmode="numeric"><em>分钟</em></div>
+                </label>
+                <label class="field-card delay-card">
+                  <span>最长间隔</span>
+                  <div class="input-with-unit"><input id="proactiveMsgMaxInput" type="number" min="1" max="1440" step="1" inputmode="numeric"><em>分钟</em></div>
+                </label>
+              </div>
+            </section>
+
+            <section class="setting-section" id="proactiveMailSection">
+              <div class="section-heading">
+                <span><i class="sec-emoji">💌</i>主动来信</span>
+                <small>TA 会往信箱里投信</small>
+              </div>
+              <div class="setting-row">
+                <div class="setting-copy">
+                  <label for="proactiveMailToggle">主动写信</label>
+                  <p>关闭后 TA 不会主动来信</p>
+                </div>
+                <button class="toggle" id="proactiveMailToggle" type="button" role="switch" aria-checked="false" aria-label="主动来信"><i></i></button>
+              </div>
+              <div class="delay-grid interval-grid">
+                <label class="field-card delay-card">
+                  <span>最短间隔</span>
+                  <div class="input-with-unit"><input id="proactiveMailMinInput" type="number" min="1" max="720" step="1" inputmode="numeric"><em>时</em></div>
+                </label>
+                <label class="field-card delay-card">
+                  <span>最长间隔</span>
+                  <div class="input-with-unit"><input id="proactiveMailMaxInput" type="number" min="1" max="720" step="1" inputmode="numeric"><em>时</em></div>
+                </label>
+              </div>
+            </section>
+
+            <section class="setting-section">
+              <div class="section-heading">
+                <span><i class="sec-emoji">💬</i>朋友圈互动概率</span>
+                <small>TA 自动点赞、评论你朋友圈的概率</small>
+              </div>
+              <div class="delay-grid is-single">
+                <label class="field-card delay-card">
+                  <span>点赞/评论概率</span>
+                  <div class="input-with-unit"><input id="momentChanceInput" type="number" min="0" max="100" step="1" inputmode="numeric"><em>％</em></div>
+                </label>
+              </div>
+            </section>
+
+            <button class="library-entry" id="settingsCharBtn" type="button">
+              <span class="library-icon"><svg class="icon"><use href="#i-users"></use></svg></span>
+              <span class="library-copy">
+                <b>梦角管理</b>
+                <small id="settingsCharCount">共 1 位梦角 · 新增 / 编辑 / 删除</small>
+              </span>
+              <svg class="icon chevron"><use href="#i-chevron"></use></svg>
+            </button>
+
+            <button class="library-entry" id="openCardsBtn" type="button">
+              <span class="library-icon"><svg class="icon"><use href="#i-card"></use></svg></span>
+              <span class="library-copy">
+                <b>字卡库</b>
+                <small id="settingsCardCount">32 张字卡 · 编辑 / 导入 / 导出</small>
+              </span>
+              <svg class="icon chevron"><use href="#i-chevron"></use></svg>
+            </button>
+
+            <button class="danger-ghost" id="clearChatBtn" type="button">清空聊天记录</button>
+          </div>
+          <footer class="sheet-footer">
+            <button class="primary-btn" id="saveSettings" type="button">保存设置</button>
+          </footer>
+        </section>
+      </div>
+
+      <!-- 消息操作面板 -->
+      <div class="action-layer" id="actionLayer" aria-hidden="true">
+        <div class="layer-backdrop" data-close-action></div>
+        <section class="action-sheet" role="dialog" aria-modal="true" aria-label="消息操作">
+          <div class="action-preview" id="actionPreview"></div>
+          <div class="action-list" id="actionList"></div>
+          <button class="action-cancel" id="actionCancel" type="button">取消</button>
+        </section>
+      </div>
+
+      <!-- 语音通话 -->
+      <div class="call-layer" id="callLayer" aria-hidden="true">
+        <div class="call-noise" aria-hidden="true"></div>
+        <button class="call-minimize" id="callMinimize" aria-label="缩小通话窗口">
+          <svg class="icon"><use href="#i-minimize"></use></svg>
+        </button>
+        <div class="call-content">
+          <div class="call-overline">VOICE CALL · <span id="callName">沈砚</span></div>
+          <div class="call-avatar-wrap">
+            <span class="call-ring call-ring-a"></span>
+            <span class="call-ring call-ring-b"></span>
+            <div class="avatar call-avatar" id="callAvatar">砚</div>
+          </div>
+          <h2 id="callStatus">正在接通…</h2>
+          <p class="call-timer" id="callTimer">00:00</p>
+          <p class="call-quote" id="callQuote">“我把今天的想念，都放进了字卡里。”</p>
+          <div class="call-actions">
+            <div class="call-control">
+              <button class="call-btn" id="muteBtn" aria-label="静音"><svg class="icon"><use href="#i-mute"></use></svg></button>
+              <span>静音</span>
+            </div>
+            <div class="call-control">
+              <button class="call-btn hangup-btn" id="hangupBtn" aria-label="挂断"><svg class="icon"><use href="#i-hangup"></use></svg></button>
+              <span>挂断</span>
+            </div>
+            <div class="call-control">
+              <button class="call-btn" id="speakerBtn" aria-label="免提"><svg class="icon"><use href="#i-speaker"></use></svg></button>
+              <span>免提</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 通话最小化后的悬浮胶囊 -->
+      <button class="call-mini" id="callMini" hidden aria-label="返回通话">
+        <span class="call-mini-dot"></span>
+        <span id="callMiniName">沈砚</span>
+        <b id="callMiniTimer">00:00</b>
+      </button>
+
+      <!-- 梦角切换 / 管理面板（点击主页头图或「梦角管理」都会打开这里） -->
+      <div class="char-layer" id="charLayer" aria-hidden="true">
+        <div class="layer-backdrop" data-close-char></div>
+        <section class="char-panel" role="dialog" aria-modal="true" aria-labelledby="charPanelTitle">
+          <header class="char-panel-head">
+            <div class="page-title"><span class="eyebrow">CHARACTERS</span><h3 id="charPanelTitle">选择梦角</h3></div>
+            <button class="icon-btn" id="charPanelClose" aria-label="关闭">
+              <svg class="icon"><use href="#i-close"></use></svg>
+            </button>
+          </header>
+          <p class="char-panel-tip">点一下即可切换，切换后所有子页面都会读取该梦角的独立数据。</p>
+          <div class="char-panel-list" id="charPanelList"></div>
+          <button class="block-add" type="button" id="charPanelAdd">
+            <svg class="icon"><use href="#i-plus"></use></svg><span>新增梦角</span>
+          </button>
+        </section>
+      </div>
+
+      <!-- 通用弹窗 -->
+      <div class="modal-layer" id="genericLayer" aria-hidden="true">
+        <div class="layer-backdrop" data-close-modal></div>
+        <section class="modal-card" id="genericDialog" role="dialog" aria-modal="true"></section>
+      </div>
+
+      <div class="toast-host" id="toastHost" aria-live="polite" aria-atomic="true"></div>
+    </div>
+  </div>
+
+  <!-- 隐藏的文件输入 -->
+  <input type="file" id="imageInput" accept="image/*" hidden>
+  <input type="file" id="cameraInput" accept="image/*" capture="environment" hidden>
+  <input type="file" id="cardsFileInput" accept=".json,.txt,text/plain,application/json" hidden>
+  <input type="file" id="chatFileInput" accept=".json,application/json" hidden>
+  <input type="file" id="bgFileInput" accept="image/*" hidden>
+  <input type="file" id="momentFileInput" accept="image/*" hidden>
+  <input type="file" id="avatarFileInput" accept="image/*" hidden>
+  <!-- 本地音频导入：mp3 / wav / m4a / ogg 等 -->
+  <input type="file" id="musicFileInput" accept="audio/*,.mp3,.wav,.m4a,.aac,.ogg,.oga,.flac,.opus,.webm" hidden>
+
+  <script src="app.js"></script>
+</body>
+</html>
